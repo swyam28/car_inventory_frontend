@@ -1,0 +1,735 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Car Inventory Management System
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- Navigation -->
+  <nav class="bg-white shadow-md">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+     <div class="flex items-center space-x-3">
+      <img alt="Company logo with stylized car icon in blue and white" class="h-10 w-10" height="40" src="https://storage.googleapis.com/a1aa/image/806a24c7-07b0-4c39-ca47-4c7f72bf5aac.jpg" width="40"/>
+      <span class="font-semibold text-xl text-blue-700">
+       Car Inventory
+      </span>
+     </div>
+     <div class="hidden md:flex space-x-6 font-medium text-gray-700">
+      <a class="hover:text-blue-600 transition" href="#login">
+       Login
+      </a>
+      <a class="hover:text-blue-600 transition" href="#inventory">
+       Inventory
+      </a>
+      <a class="hover:text-blue-600 transition" href="#add-car">
+       Add Car
+      </a>
+      <a class="hover:text-blue-600 transition" href="#history">
+       Vehicle History
+      </a>
+      <a class="hover:text-blue-600 transition" href="#documents">
+       Documents
+      </a>
+      <a class="hover:text-blue-600 transition" href="#alerts">
+       Alerts
+      </a>
+     </div>
+     <div class="md:hidden">
+      <button aria-label="Toggle menu" class="text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600" id="menu-btn">
+       <i class="fas fa-bars fa-lg">
+       </i>
+      </button>
+     </div>
+    </div>
+   </div>
+   <div class="hidden md:hidden bg-white border-t border-gray-200" id="mobile-menu">
+    <a class="block px-4 py-2 text-gray-700 hover:bg-blue-50" href="#login">
+     Login
+    </a>
+    <a class="block px-4 py-2 text-gray-700 hover:bg-blue-50" href="#inventory">
+     Inventory
+    </a>
+    <a class="block px-4 py-2 text-gray-700 hover:bg-blue-50" href="#add-car">
+     Add Car
+    </a>
+    <a class="block px-4 py-2 text-gray-700 hover:bg-blue-50" href="#history">
+     Vehicle History
+    </a>
+    <a class="block px-4 py-2 text-gray-700 hover:bg-blue-50" href="#documents">
+     Documents
+    </a>
+    <a class="block px-4 py-2 text-gray-700 hover:bg-blue-50" href="#alerts">
+     Alerts
+    </a>
+   </div>
+  </nav>
+  <main class="flex-grow max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 space-y-12">
+   <!-- Login Section -->
+   <section class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6" id="login">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
+     User Login
+    </h2>
+    <form action="/login" class="space-y-5" method="POST">
+     <div>
+      <label class="block text-gray-700 font-medium mb-1" for="username">
+       Username
+      </label>
+      <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="username" name="username" placeholder="Enter your username" required="" type="text"/>
+     </div>
+     <div>
+      <label class="block text-gray-700 font-medium mb-1" for="password">
+       Password
+      </label>
+      <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="password" name="password" placeholder="Enter your password" required="" type="password"/>
+     </div>
+     <button class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition" type="submit">
+      Login
+     </button>
+    </form>
+   </section>
+   <!-- Car Inventory Display -->
+   <section class="bg-white rounded-lg shadow-md p-6" id="inventory">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">
+     Car Inventory
+    </h2>
+    <div class="overflow-x-auto">
+     <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-blue-50">
+       <tr>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Make
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Model
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Registration Number
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Status
+        </th>
+        <th class="px-4 py-3 text-center text-sm font-semibold text-gray-700">
+         Actions
+        </th>
+       </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         Toyota
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         Camry
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         KA-01-AB-1234
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Available
+         </span>
+        </td>
+        <td class="px-4 py-3 text-center space-x-2">
+         <button aria-label="Remove Toyota Camry KA-01-AB-1234" class="text-red-600 hover:text-red-800 focus:outline-none">
+          <i class="fas fa-trash-alt">
+          </i>
+         </button>
+        </td>
+       </tr>
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         Honda
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         Civic
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         KA-02-CD-5678
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+          In Use
+         </span>
+        </td>
+        <td class="px-4 py-3 text-center space-x-2">
+         <button aria-label="Remove Honda Civic KA-02-CD-5678" class="text-red-600 hover:text-red-800 focus:outline-none">
+          <i class="fas fa-trash-alt">
+          </i>
+         </button>
+        </td>
+       </tr>
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         Ford
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         Mustang
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         KA-03-EF-9012
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Available
+         </span>
+        </td>
+        <td class="px-4 py-3 text-center space-x-2">
+         <button aria-label="Remove Ford Mustang KA-03-EF-9012" class="text-red-600 hover:text-red-800 focus:outline-none">
+          <i class="fas fa-trash-alt">
+          </i>
+         </button>
+        </td>
+       </tr>
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         BMW
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         X5
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         KA-04-GH-3456
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+          In Use
+         </span>
+        </td>
+        <td class="px-4 py-3 text-center space-x-2">
+         <button aria-label="Remove BMW X5 KA-04-GH-3456" class="text-red-600 hover:text-red-800 focus:outline-none">
+          <i class="fas fa-trash-alt">
+          </i>
+         </button>
+        </td>
+       </tr>
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         Audi
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         A4
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         KA-05-IJ-7890
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Available
+         </span>
+        </td>
+        <td class="px-4 py-3 text-center space-x-2">
+         <button aria-label="Remove Audi A4 KA-05-IJ-7890" class="text-red-600 hover:text-red-800 focus:outline-none">
+          <i class="fas fa-trash-alt">
+          </i>
+         </button>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </section>
+   <!-- Add Car to Inventory -->
+   <section class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6" id="add-car">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
+     Add New Car
+    </h2>
+    <form action="/add-car" class="space-y-5" method="POST">
+     <div>
+      <label class="block text-gray-700 font-medium mb-1" for="make">
+       Make
+      </label>
+      <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="make" name="make" placeholder="e.g. Toyota" required="" type="text"/>
+     </div>
+     <div>
+      <label class="block text-gray-700 font-medium mb-1" for="model">
+       Model
+      </label>
+      <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="model" name="model" placeholder="e.g. Camry" required="" type="text"/>
+     </div>
+     <div>
+      <label class="block text-gray-700 font-medium mb-1" for="registration">
+       Registration Number
+      </label>
+      <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="registration" name="registration" placeholder="e.g. KA-01-AB-1234" required="" type="text"/>
+     </div>
+     <button class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition" type="submit">
+      Add Car
+     </button>
+    </form>
+   </section>
+   <!-- Vehicle History -->
+   <section class="bg-white rounded-lg shadow-md p-6" id="history">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">
+     Vehicle History
+    </h2>
+    <div class="overflow-x-auto">
+     <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-blue-50">
+       <tr>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Registration Number
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Service Date
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Service Details
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Fuel Consumption (L/100km)
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Maintenance Logs
+        </th>
+       </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         KA-01-AB-1234
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2024-05-10
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         Oil change, tire rotation
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         7.5
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         Replaced brake pads
+        </td>
+       </tr>
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         KA-02-CD-5678
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2024-04-22
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         Engine diagnostics, battery check
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         8.2
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         Battery replaced
+        </td>
+       </tr>
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         KA-03-EF-9012
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2024-03-15
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         Brake fluid replacement
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         9.0
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         Brake pads inspected
+        </td>
+       </tr>
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         KA-04-GH-3456
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2024-05-01
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         Tire replacement
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         7.8
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         New tires installed
+        </td>
+       </tr>
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         KA-05-IJ-7890
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2024-02-28
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         Air filter replacement
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         7.2
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         Air filter replaced
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </section>
+   <!-- Document Validation -->
+   <section class="bg-white rounded-lg shadow-md p-6" id="documents">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">
+     Document Validation
+    </h2>
+    <div class="overflow-x-auto">
+     <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-blue-50">
+       <tr>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Registration Number
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         PUC Status
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         PUC Expiry
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         RC Status
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         RC Expiry
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Insurance Status
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Insurance Expiry
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Permit Status
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+         Permit Expiry
+        </th>
+       </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         KA-01-AB-1234
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-01-15
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-06-30
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+          Expiring Soon
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2024-07-10
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-12-01
+        </td>
+       </tr>
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         KA-02-CD-5678
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
+          Expired
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2023-12-01
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-03-15
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-11-20
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+          Expiring Soon
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2024-06-15
+        </td>
+       </tr>
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         KA-03-EF-9012
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-08-22
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-09-10
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-10-05
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-12-20
+        </td>
+       </tr>
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         KA-04-GH-3456
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+          Expiring Soon
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2024-07-01
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
+          Expired
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2023-11-30
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+          Expiring Soon
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2024-08-15
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-05-10
+        </td>
+       </tr>
+       <tr>
+        <td class="px-4 py-3 text-gray-800">
+         KA-05-IJ-7890
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-04-18
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-07-22
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          Valid
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2025-09-30
+        </td>
+        <td class="px-4 py-3">
+         <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
+          Expired
+         </span>
+        </td>
+        <td class="px-4 py-3 text-gray-800">
+         2023-12-05
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </section>
+   <!-- Expiration Alerts -->
+   <section class="bg-white rounded-lg shadow-md p-6" id="alerts">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">
+     Expiration Alerts
+    </h2>
+    <ul class="space-y-4">
+     <li class="flex items-center space-x-3 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-md">
+      <i class="fas fa-exclamation-triangle text-yellow-600 text-xl">
+      </i>
+      <div>
+       <p class="text-gray-800 font-semibold">
+        PUC document for KA-04-GH-3456 is expiring soon on
+        <time datetime="2024-07-01">
+         July 1, 2024
+        </time>
+        .
+       </p>
+       <p class="text-gray-700 text-sm">
+        Please initiate renewal process immediately.
+       </p>
+      </div>
+     </li>
+     <li class="flex items-center space-x-3 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-md">
+      <i class="fas fa-exclamation-triangle text-yellow-600 text-xl">
+      </i>
+      <div>
+       <p class="text-gray-800 font-semibold">
+        Insurance for KA-01-AB-1234 is expiring soon on
+        <time datetime="2024-07-10">
+         July 10, 2024
+        </time>
+        .
+       </p>
+       <p class="text-gray-700 text-sm">
+        Please ensure renewal to avoid coverage lapse.
+       </p>
+      </div>
+     </li>
+     <li class="flex items-center space-x-3 bg-red-50 border-l-4 border-red-500 p-4 rounded-md">
+      <i class="fas fa-times-circle text-red-600 text-xl">
+      </i>
+      <div>
+       <p class="text-gray-800 font-semibold">
+        PUC document for KA-02-CD-5678 has expired on
+        <time datetime="2023-12-01">
+         December 1, 2023
+        </time>
+        .
+       </p>
+       <p class="text-gray-700 text-sm">
+        Immediate action required to update document.
+       </p>
+      </div>
+     </li>
+     <li class="flex items-center space-x-3 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-md">
+      <i class="fas fa-exclamation-triangle text-yellow-600 text-xl">
+      </i>
+      <div>
+       <p class="text-gray-800 font-semibold">
+        Permit for KA-02-CD-5678 is expiring soon on
+        <time datetime="2024-06-15">
+         June 15, 2024
+        </time>
+        .
+       </p>
+       <p class="text-gray-700 text-sm">
+        Please start renewal process.
+       </p>
+      </div>
+     </li>
+     <li class="flex items-center space-x-3 bg-red-50 border-l-4 border-red-500 p-4 rounded-md">
+      <i class="fas fa-times-circle text-red-600 text-xl">
+      </i>
+      <div>
+       <p class="text-gray-800 font-semibold">
+        RC document for KA-04-GH-3456 has expired on
+        <time datetime="2023-11-30">
+         November 30, 2023
+        </time>
+        .
+       </p>
+       <p class="text-gray-700 text-sm">
+        Please update registration certificate immediately.
+       </p>
+      </div>
+     </li>
+     <li class="flex items-center space-x-3 bg-red-50 border-l-4 border-red-500 p-4 rounded-md">
+      <i class="fas fa-times-circle text-red-600 text-xl">
+      </i>
+      <div>
+       <p class="text-gray-800 font-semibold">
+        Permit for KA-05-IJ-7890 has expired on
+        <time datetime="2023-12-05">
+         December 5, 2023
+        </time>
+        .
+       </p>
+       <p class="text-gray-700 text-sm">
+        Renew permit to avoid penalties.
+       </p>
+      </div>
+     </li>
+    </ul>
+   </section>
+  </main>
+  <footer class="bg-white border-t border-gray-200 py-6 mt-12">
+   <div class="max-w-7xl mx-auto px-4 text-center text-gray-600 text-sm">
+    © 2024 Car Inventory Management System. All rights reserved.
+   </div>
+  </footer>
+  <script>
+   const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+ </body>
+</html>
